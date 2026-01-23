@@ -1,5 +1,5 @@
 .form-title {
-  padding-bottom: 20px;
+  padding-bottom: 10px;
 }
 
 .form-title h1 {
@@ -11,7 +11,7 @@
 
 .form-buttons {
   margin: auto;
-  margin-top: 30px;
+  margin-top: 20px;
 }
 
 .form-buttons button {

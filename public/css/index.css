@@ -38,7 +38,7 @@ body {
   --dark2: #212121;
   --light1: white;
   --light2: #E6E6E6;
-  --gap0: 30px;
+  --gap0: 25px;
   --gap1: 18px;
   --gap2: calc(var(--gap1) / 2);
   --border1: 2px solid black;
@@ -182,7 +182,7 @@ footer {
 
 .form {
   background-color: var(--dark2);
-  padding: var(--gap0) calc(var(--gap0) * 1.5);
+  padding: var(--gap2) calc(var(--gap0) * 2);
   color: white;
   display: flex;
   flex-direction: column;
@@ -197,7 +197,7 @@ footer {
   display: grid;
   grid-template-columns: 0.8fr 1fr;
   font-size: var(--f_size3);
-  width: 650px;
+  width: 45vw;
 }
 
 .form-buttons {
