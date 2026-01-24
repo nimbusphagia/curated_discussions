@@ -1,0 +1,25 @@
+.bg-body {
+  background-image: url('/images/purple1.jpg');
+}
+
+div.wrapper {
+  height: 70vh;
+  flex: 1;
+}
+
+.display-form {
+  padding: 40px 30px;
+  background-color: var(--dark2);
+  text-align: center;
+}
+
+.display-form .form-item {
+  width: 35vw
+}
+
+.form-item p {
+  padding: 0;
+  margin: 0;
+  font-size: 20px;
+  color: var(--accent3);
+}

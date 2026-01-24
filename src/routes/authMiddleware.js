@@ -1,10 +1,12 @@
 function isAuth(req, res, next) {
-  if (!req.isAuthenticated()) {
+  const publicRoutes = ['/login', '/signup'];
+
+  if (!req.isAuthenticated() && !publicRoutes.includes(req.path)) {
     return res.redirect('/login');
   }
+
   next();
 }
-
 
 
 export { isAuth }

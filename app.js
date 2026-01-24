@@ -2,9 +2,6 @@ import 'dotenv/config'
 import express from 'express'
 import path from 'path'
 import { fileURLToPath } from 'url';
-import homeRouter from './src/routes/home.js';
-import signupRouter from './src/routes/sign-up.js';
-import { loginRouter } from './src/routes/login.js';
 import session from 'express-session';
 import connectPgSimple from 'connect-pg-simple';
 import { pool } from './src/database/pool.js';
@@ -12,14 +9,24 @@ import passport from 'passport';
 import { Strategy } from 'passport-local';
 import { getUserById, getUserByEmail } from './src/database/queries.js';
 import bcrypt from 'bcrypt';
+import { isAuth } from './src/routes/authMiddleware.js';
+// Routes
+import homeRouter from './src/routes/home.js';
+import signupRouter from './src/routes/sign-up.js';
+import { loginRouter } from './src/routes/login.js';
 import logoutRouter from './src/routes/logout.js';
+import profileRoute from './src/routes/profile.js';
+import discussionsRoute from './src/routes/discussions.js';
 
 
 // App setup
 const app = express();
 const _dirname = path.dirname(fileURLToPath(import.meta.url));
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(_dirname, 'public')));
+app.use(express.static(path.join(_dirname, 'public'), {
+  //maxAge: "1y",
+  //immutable: true
+}));
 app.set('views', path.join(_dirname, 'src/views'));
 app.set('view engine', 'pug');
 
@@ -70,15 +77,19 @@ passport.deserializeUser(async (userId, done) => {
   }
 })
 
-//app.use(passport.initialize());
 app.use(passport.session());
 
+// General middleware
+
+app.use(isAuth);
 // Routes
 
 app.use(homeRouter);
 app.use(signupRouter);
 app.use(loginRouter);
 app.use(logoutRouter);
+app.use(profileRoute);
+app.use(discussionsRoute);
 
 // Error catching middleware
 app.use((err, req, res, next) => {

@@ -1,13 +1,14 @@
 .navigation-bar {
   margin: 0;
   padding: 0 var(--gap1);
-  height: 50px;
+  height: var(--navbar-height);
   color: var(--light1);
-  background-color: var(--dark1);
+  background-color: var(--dark2);
+  overflow: hidden;
 }
 
 .logo-container h2 {
-  color: var(--accent1);
+  color: var(--accent3);
 }
 
 .navigation-links {
@@ -17,7 +18,8 @@
   font-family: var(--font2);
 }
 
-.navigation-links a {
+.navigation-links a,
+.navigation-links button {
   font-size: var(--f_size2)
 }
 
@@ -25,19 +27,23 @@
   position: absolute;
   top: 0;
   width: 100%;
-  background-color: var(--dark1);
 }
 
 .menu-user li {
   position: relative;
-  top: 100%;
   padding: 0.7rem 1rem;
 }
 
 .menu-user li:not(:first-child) {
   display: none;
+  background-color: var(--dark2);
 }
 
 .menu-user:hover li:not(:first-child) {
   display: block;
+}
+
+.not-form {
+  padding: 0;
+  margin: 0;
 }

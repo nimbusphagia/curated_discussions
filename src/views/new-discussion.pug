@@ -1,0 +1,25 @@
+include partial-views/head
+    link(rel="stylesheet", href="/css/navbar.css")
+    link(rel="stylesheet", href="/css/index.css")
+    link(rel="stylesheet", href="/css/discussion.css")
+    title= 'Start new discussion'
+body(class='bg-body')
+  include partial-views/navbar
+  div(class='wrapper v-flex flex-center-all')
+    form(class="form discussion-form", method="POST")
+      div(class='form-title v-flex ')
+        h1 New Discussion
+      div( class='form-item2 title')
+        label(for='title') Title :
+        input(id='title', type="text", name="title", required)
+      div( class='form-item2 imgUrl')
+        label(for='img_url') Image url (optional) :
+        input(id='img_url', type="url", name="img_url")
+      div( class='form-item2 description')
+        label(for='description') Description:
+        textarea(id='description',  name="description", required)
+      div(class='form-buttons h-flex')
+        button(type='submit', class='cancel-btn') Cancel
+        button(type='submit', class='create-btn') Create discussion
+
+  include partial-views/footer
