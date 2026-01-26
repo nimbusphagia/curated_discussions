@@ -1,11 +1,14 @@
 import { createDiscussion, createPost, getDiscussionById, getPostsByDiscussion, getUserById } from "../database/queries.js";
 
 async function discussionsGet(req, res) {
-  res.render('discussions');
+  res.redirect('/explore');
 }
 
 async function newGet(req, res) {
-  res.render('new-discussion');
+  if (req.user.role === 'member') {
+    return res.redirect('/user/membership?warning=tier1');
+  }
+  return res.render('new-discussion');
 }
 async function newPost(req, res) {
   const { title, description, img_url } = req.body;
@@ -27,6 +30,13 @@ async function discussionGet(req, res) {
     const discussion = await getDiscussionById(id);
     const user = await getUserById(discussion.created_by);
     const comments = await getPostsByDiscussion(discussion.id);
+    if (req.user.role === 'member') {
+      user.first_name = 'Anonymous';
+      user.last_name = 'Goose';
+      for (const c of comments) {
+        c.username = 'Anonymous';
+      }
+    }
     return res.render('discussion', { discussion: discussion, user: user, comments: comments })
   } catch (err) {
     console.log(err);

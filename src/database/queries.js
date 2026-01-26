@@ -42,7 +42,8 @@ async function getDiscussions() {
       d.description,
       d.created_at,
       u.first_name || ' ' || u.last_name AS username,
-      u.img_url AS user_img
+      u.img_url AS user_img,
+      u.role
     FROM discussions d
     LEFT JOIN users u
       ON d.created_by = u.id
@@ -58,13 +59,17 @@ async function getDiscussionById(id) {
   return rows[0];
 }
 
+async function getDiscussionsByUser(user_id) {
+  const rows = await query('SELECT * FROM discussions WHERE created_by = $1', [user_id]);
+  return rows;
+}
+
 // Posts (Comments)
-async function createPost(userId, discussionId, text) {
+async function createPost(discussionId, userId, text) {
   const sql = `
     INSERT INTO posts (discussion_id, user_id, content) 
     VALUES ($1, $2, $3) 
     RETURNING discussion_id, user_id`;
-  console.log(discussionId, userId, text);
   const rows = await query(sql, [discussionId, userId, text]);
   return rows[0] || null;
 }
@@ -86,7 +91,12 @@ async function getPostsByDiscussion(discussion_id) {
   return rows;
 }
 
+async function getPostsByUser(user_id) {
+  const rows = await query('SELECT * FROM posts WHERE user_id = $1', [user_id]);
+  return rows;
+}
+
 export { createUser, getUserById, getUserByEmail };
-export { createDiscussion, getDiscussions, getDiscussionById };
-export { createPost, getPostsByDiscussion };
+export { createDiscussion, getDiscussions, getDiscussionById, getDiscussionsByUser };
+export { createPost, getPostsByDiscussion, getPostsByUser };
 

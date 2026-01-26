@@ -9,26 +9,31 @@ body(class='bg-body')
     div(class='m-container float v-flex')
       m.title 
         h1 Membership
-      div(class='memberships h-flex')
+      div(class='memberships')
         div(class='m-item float ')
           div(class=' img-container ' )
             img(src="https://upload-os-bbs.hoyolab.com/upload/2025/03/30/402494676/1e649e6779bd8d5cc837f641bdc95e38_6032655024434046878.webp", alt="")
-            div(class= user.role === 'member' ? 'unlocked' : 'locked')
-          div(class='m-body v-flex')
-            h3 Tier 1
-            p New to the community but excited to be part of it! We accept you with excitement but you can't be fully trusted yet, interact with posts to reach higher!
+          div(class='m-body ')
+            h3 Novice
+            .description
+              p You can't be fully trusted yet, interact with posts to reach higher!
+              p Take part in 5 discussions to unlock Tier 2.
+          div(class= user.role === 'member' ? 'unlocked' : 'locked')
         div(class='m-item float ')
           div(class='img-container ')
             img(src="https://preview.redd.it/chiikawa-and-hachiwares-friendship-is-so-sweet-v0-ke02d73xppre1.jpeg?width=640&crop=smart&auto=webp&s=f618ee1f82935879a805fdb80fa6acdb39019640", alt="")
-            div(class= user.role === 'trusted-member' ? 'unlocked' : 'locked')
-          div(class='m-body v-flex')
-            h3 Tier 2
-            p New to the community but excited to be part of it! We accept you with excitement but you can't be fully trusted yet, interact with posts to reach higher!
+          div(class='m-body ')
+            h3 Contributor
+            .description
+              p Start your own discussions, see who’s who, and keep your discussions moderated. 
+              p Create 10 discussions, each with 10 comments from other members to reach Tier 3.
+          div(class= user.role === 'trusted_member' ? 'unlocked' : 'locked')
         div(class='m-item float ')
           div(class='img-container ' )
             img(src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4jvbm3BF2E2tyxGlpxu25JeqmzNAhMcmOLg&s", alt="")
-            div(class= user.role === 'admin' ? 'unlocked' : 'locked')
-          div(class='m-body v-flex')
-            h3 Tier 3
-            p New to the community but excited to be part of it! We accept you with excitement but you can't be fully trusted yet, interact with posts to reach higher!
+          div(class='m-body')
+            h3 Moderator
+            .description
+              p You’re trusted with the keys. Moderate all content and help keep the community fun, fair, and alive.
+          div(class= user.role === 'admin' ? 'unlocked' : 'locked')
   include partial-views/footer

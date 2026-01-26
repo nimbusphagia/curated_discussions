@@ -5,24 +5,46 @@ include partial-views/head
   title= 'Profile'
 body(class='profile-body bg-body')
   include partial-views/navbar
-  div(class='wrapper h-flex flex-center-all')
-    form(class='form display-form')
-      h1= 'Account details'
-      .form-img
-        img(src=user.img_url, alt="")
-      .form-item 
-        label(for='first-name') Name :
-        input(id='first-name', type="text", name="first_name", disabled required value= user.first_name )
-      .form-item 
-        label(for='last-name') Last name :
-        input(id='last-name', type="text", name="last_name", disabled required value= user.last_name)
-      .form-item 
-        label(for='email') Email :
-        input(id='email', type="email", name="email", disabled required value= user.email) 
-      .form-item 
-        label(for='imgUrl') Profile picture :
-        input(id='imgUrl', type="url", name="img_url", disabled required value= user.img_url) 
-      .form-item
-        label(for="role") Status :
-        p #{user.role } (Tier 1)
+  div(class='wrapper ')
+    div(class='profile-main')
+      form(class='form display-form')
+        h1= 'Account details'
+        .form-img
+          img(src=user.img_url, alt="")
+        .form-item 
+          label(for='first-name') Name :
+          input(id='first-name', type="text", name="first_name", disabled required value= user.first_name )
+        .form-item 
+          label(for='last-name') Last name :
+          input(id='last-name', type="text", name="last_name", disabled required value= user.last_name)
+        .form-item 
+          label(for='email') Email :
+          input(id='email', type="email", name="email", disabled required value= user.email) 
+        .form-item 
+          label(for='imgUrl') Profile picture :
+          input(id='imgUrl', type="url", name="img_url", disabled required value= user.img_url) 
+        .form-item
+          label(for="role") Status :
+          p #{user.role } (Tier 1)
+    div(class='profile-utilities')
+      div(class='profile-stats float')
+        .stats-header
+          h3 Statistics
+        .stats-body
+          .stat-item 
+            h4 Discussions 
+            p #{discussions.length}
+          .stat-item
+            h4 Comments 
+            p #{comments.length}
+      div(class='profile-discussions float')
+        h3 My discussions
+        if discussions.length === 0
+          p.msg It's lonely here
+        else
+          ul
+            each d in discussions
+              li.discussion-item
+                a(href='/discussions/' + d.id) #{d.title}
+
   include partial-views/footer
