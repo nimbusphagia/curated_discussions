@@ -15,7 +15,8 @@ export const signupValidator = [
     .trim()
     .notEmpty().withMessage("Email is required")
     .isEmail().withMessage("Invalid email address")
-    .normalizeEmail(),
+    .normalizeEmail()
+    .toLowerCase(),
 
   body("password")
     .notEmpty().withMessage("Password is required")
@@ -32,13 +33,16 @@ export const signupValidator = [
     })
 ];
 
+
 export const loginValidator = [
   body("username")
     .trim()
     .notEmpty().withMessage("Email is required")
     .isEmail().withMessage("Invalid email address")
-    .normalizeEmail(),
+    .normalizeEmail()
+    .toLowerCase(),
 
   body("password")
     .notEmpty().withMessage("Password is required")
 ];
+
