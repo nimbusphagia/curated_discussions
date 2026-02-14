@@ -25,7 +25,7 @@ const app = express();
 const _dirname = path.dirname(fileURLToPath(import.meta.url));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(_dirname, 'public'), {
-  maxAge: '1d'
+  maxAge: '7d'
 }));
 app.set('views', path.join(_dirname, 'src/views'));
 app.set('view engine', 'pug');
